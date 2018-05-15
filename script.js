@@ -24,6 +24,7 @@ let bank = {
 
 };
 
+//manages the view
 let view = {
     hideLogin: function () {
         loginInput.style.display = 'none';
@@ -31,6 +32,7 @@ let view = {
     }
 };
 
+//handles communication between the view and the model
 let handlers = {
     attemptLogin: function () {
         let loginInput = document.getElementById('loginInput');
