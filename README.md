@@ -1,3 +1,3 @@
 # JS-Bank
 
-A simple bank built to practice vanilla JavaScript
+A simple bank website built to practice vanilla JavaScript
