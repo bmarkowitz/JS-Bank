@@ -1,3 +1,6 @@
+let loginInput = document.getElementById('loginInput');
+let loginButton = document.getElementById('loginButton');
+
 //manages entire bank
 let bank = {
     accounts: [],
@@ -10,7 +13,7 @@ let bank = {
                 this.currentBalance += amount;
             },
             withdrawMoney: function (amount) {
-                this.currentBalance + - amount;
+                this.currentBalance +- amount;
             },
             displayCurrentBalance: function () {
                 console.log(this.currentBalance);
@@ -55,10 +58,7 @@ let view = {
 //handles communication between the view and the model
 let handlers = {
     attemptLogin: function () {
-        let loginInput = document.getElementById('loginInput');
-        let loginInputValue = document.getElementById('loginInput').value;
-        let loginButton = document.getElementById('loginButton');
-
+        let loginInputValue = loginInput.value;
         let userNameMatched = false;
 
         bank.accounts.forEach(function (item, index) {
