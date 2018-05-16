@@ -30,11 +30,18 @@ let view = {
         loginInput.style.display = 'none';
         loginButton.style.display = 'none';
     },
-    displayUserData: function(matchedUser) {
+    displayUserData: function (matchedUser) {
+
+    },
+    setLoginParagraph: function (message, name) {
         let loginPara = document.getElementById('loginParagraph');
-        let body = document.querySelector('body');
-        loginPara.textContent = 'Welcome, ' + matchedUser.username + '!';
-        body.appendChild(loginPara);
+        if (name) {
+            loginPara.textContent = message + name + '!';
+        }
+        else {
+            loginPara.textContent = message;
+        }
+
     }
 };
 
@@ -52,9 +59,14 @@ let handlers = {
                 view.hideLogin();
                 userNameMatched = true;
                 view.displayUserData(item);
+                view.setLoginParagraph('Welcome, ', item.username);
                 return;
             }
         });
+        if (userNameMatched === false) {
+            view.setLoginParagraph('The username you entered either doesn\'t exit or was not found. Please try again.');
+
+        }
     },
 };
 
