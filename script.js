@@ -31,10 +31,10 @@ let view = {
         loginButton.style.display = 'none';
     },
     displayUserData: function(matchedUser) {
-        let welcomePara = document.createElement('p');
+        let loginPara = document.getElementById('loginParagraph');
         let body = document.querySelector('body');
-        welcomePara.textContent = 'Welcome, ' + matchedUser.username + '!';
-        body.appendChild(welcomePara);
+        loginPara.textContent = 'Welcome, ' + matchedUser.username + '!';
+        body.appendChild(loginPara);
     }
 };
 
