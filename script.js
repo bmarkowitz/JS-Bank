@@ -1,5 +1,6 @@
 let loginInput = document.getElementById('loginInput');
 let loginButton = document.getElementById('loginButton');
+let loginPara = document.getElementById('loginParagraph');
 
 //manages entire bank
 let bank = {
@@ -29,15 +30,24 @@ let bank = {
 
 //manages the view
 let view = {
-    hideLogin: function () {
-        loginInput.style.display = 'none';
-        loginButton.style.display = 'none';
+    toggleLogin: function () {
+        if(loginInput.style.display === 'none') {
+            loginInput.style.display = 'inline';
+            loginButton.style.display = 'inline';
+            loginPara.style.dislay = 'Enter a username and click login.';
+            
+            let logOutButton = document.getElementById('logOutButton');
+            logOutButton.style.display = 'none';
+        }
+        else {
+            loginInput.style.display = 'none';
+            loginButton.style.display = 'none';
+        }
     },
     displayUserData: function (matchedUser) {
 
     },
     setLoginParagraph: function (message, name) {
-        let loginPara = document.getElementById('loginParagraph');
         if (name) {
             loginPara.textContent = message + name + '!';
         }
@@ -51,6 +61,7 @@ let view = {
         let logOutButton = document.createElement('button');
         logOutButton.setAttribute('id', 'logOutButton');
         logOutButton.textContent = 'Logout';
+        logOutButton.setAttribute('onclick', "handlers.attemptLogout()");
         body.appendChild(logOutButton);
     }
 };
@@ -63,7 +74,7 @@ let handlers = {
 
         bank.accounts.forEach(function (item, index) {
             if (item.username === loginInputValue) {
-                view.hideLogin();
+                view.toggleLogin();
                 userNameMatched = true;
                 view.displayUserData(item);
                 view.setLoginParagraph('Welcome, ', item.username);
@@ -76,6 +87,12 @@ let handlers = {
 
         }
     },
+    attemptLogout: function() {
+        view.toggleLogin();
+        view.setLoginParagraph('Enter a username and click login.');
+        loginInput.value = '';
+        loginInput.focus();
+    }
 };
 
 
