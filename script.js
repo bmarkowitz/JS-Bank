@@ -42,6 +42,13 @@ let view = {
             loginPara.textContent = message;
         }
 
+    },
+    createLogOutButton: function() {
+        let body = document.querySelector('body');
+        let logOutButton = document.createElement('button');
+        logOutButton.setAttribute('id', 'logOutButton');
+        logOutButton.textContent = 'Logout';
+        body.appendChild(logOutButton);
     }
 };
 
@@ -60,6 +67,7 @@ let handlers = {
                 userNameMatched = true;
                 view.displayUserData(item);
                 view.setLoginParagraph('Welcome, ', item.username);
+                view.createLogOutButton();
                 return;
             }
         });
