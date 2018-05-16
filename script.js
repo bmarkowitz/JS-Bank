@@ -34,14 +34,22 @@ let view = {
         if(loginInput.style.display === 'none') {
             loginInput.style.display = 'inline';
             loginButton.style.display = 'inline';
-            loginPara.style.dislay = 'Enter a username and click login.';
-            
-            let logOutButton = document.getElementById('logOutButton');
-            logOutButton.style.display = 'none';
+            loginPara.style.display = 'Enter a username and click login.';
+
+            this.toggleLogout();
         }
         else {
             loginInput.style.display = 'none';
             loginButton.style.display = 'none';
+        }
+    },
+    toggleLogout: function() {
+        let logOutButton = document.getElementById('logOutButton');
+        if(logOutButton.style.display === 'none') {
+            logOutButton.style.display = 'inline';
+        }
+        else {
+            logOutButton.style.display = 'none';
         }
     },
     displayUserData: function (matchedUser) {
@@ -78,7 +86,12 @@ let handlers = {
                 userNameMatched = true;
                 view.displayUserData(item);
                 view.setLoginParagraph('Welcome, ', item.username);
-                view.createLogOutButton();
+                if(!document.getElementById('logOutButton')) {
+                    view.createLogOutButton();
+                }
+                else {
+                    view.toggleLogout();
+                }
                 return;
             }
         });
