@@ -29,6 +29,12 @@ let view = {
     hideLogin: function () {
         loginInput.style.display = 'none';
         loginButton.style.display = 'none';
+    },
+    displayUserData: function(matchedUser) {
+        let welcomePara = document.createElement('p');
+        let body = document.querySelector('body');
+        welcomePara.textContent = 'Welcome, ' + matchedUser.username + '!';
+        body.appendChild(welcomePara);
     }
 };
 
@@ -45,10 +51,11 @@ let handlers = {
             if (item.username === loginInputValue) {
                 view.hideLogin();
                 userNameMatched = true;
+                view.displayUserData(item);
                 return;
             }
         });
-    }
+    },
 };
 
 
