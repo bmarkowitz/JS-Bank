@@ -1,7 +1,7 @@
-let loginInput = document.getElementById('loginInput');
-let loginButton = document.getElementById('loginButton');
-let loginPara = document.getElementById('loginParagraph');
-let body = document.querySelector('body');
+const loginInput = document.getElementById('loginInput');
+const loginButton = document.getElementById('loginButton');
+const loginPara = document.getElementById('loginParagraph');
+const body = document.querySelector('body');
 
 //manages entire bank
 let bank = {
