@@ -53,7 +53,7 @@ let view = {
         }
     },
     displayUserData: function (matchedUser) {
-
+        console.log(matchedUser);
     },
     setLoginParagraph: function (message, name) {
         if (name) {
