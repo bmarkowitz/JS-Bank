@@ -1,6 +1,7 @@
 let loginInput = document.getElementById('loginInput');
 let loginButton = document.getElementById('loginButton');
 let loginPara = document.getElementById('loginParagraph');
+let body = document.querySelector('body');
 
 //manages entire bank
 let bank = {
@@ -53,7 +54,10 @@ let view = {
         }
     },
     displayUserData: function (matchedUser) {
-        console.log(matchedUser);
+        let currentBalancePara = document.createElement('p');
+        currentBalancePara.textContent = "Current balance: " + matchedUser.currentBalance;
+
+        body.appendChild(currentBalancePara);
     },
     setLoginParagraph: function (message, name) {
         if (name) {
@@ -65,7 +69,6 @@ let view = {
 
     },
     createLogOutButton: function() {
-        let body = document.querySelector('body');
         let logOutButton = document.createElement('button');
         logOutButton.setAttribute('id', 'logOutButton');
         logOutButton.textContent = 'Logout';
