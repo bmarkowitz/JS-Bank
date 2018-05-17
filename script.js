@@ -31,28 +31,45 @@ let bank = {
 
 //manages the view
 let view = {
-    toggleLogin: function () {
-        if(loginInput.style.display === 'none') {
-            loginInput.style.display = 'inline';
-            loginButton.style.display = 'inline';
-            loginPara.style.display = 'Enter a username and click login.';
-
-            this.toggleLogout();
-        }
-        else {
-            loginInput.style.display = 'none';
-            loginButton.style.display = 'none';
-        }
-    },
-    toggleLogout: function() {
+    setUpLogoutView: function() { //after logging in
+        loginInput.style.display = 'none';
+        loginButton.style.display = 'none';
+        this.createLogOutButton();
         let logOutButton = document.getElementById('logOutButton');
-        if(logOutButton.style.display === 'none') {
-            logOutButton.style.display = 'inline';
-        }
-        else {
-            logOutButton.style.display = 'none';
-        }
+        logOutButton.style.display = 'inline';
     },
+    setUpLoginView: function() { //after logging out
+        loginInput.style.display = 'inline';
+        loginButton.style.display = 'inline';
+        loginPara.style.display = 'Enter a username and click login.';
+        let logOutButton = document.getElementById('logOutButton');
+        logOutButton.style.display = 'none';
+
+
+    },
+    // toggleLoginElements: function () {
+    //     if(loginInput.style.display === 'none') {
+    //         loginInput.style.display = 'inline';
+    //         loginButton.style.display = 'inline';
+    //         loginPara.style.display = 'Enter a username and click login.';
+
+    //         this.toggleLogoutElements();
+    //     }
+    //     else {
+    //         loginInput.style.display = 'none';
+    //         loginButton.style.display = 'none';
+    //     }
+    // },
+    // toggleLogoutElements: function() {
+    //     let logOutButton = document.getElementById('logOutButton');
+    //     if(logOutButton.style.display === 'none') {
+    //         logOutButton.style.display = 'inline';
+    //     }
+    //     else {
+    //         logOutButton.style.display = 'none';
+    //     }
+    // },
+
     displayUserData: function (matchedUser) {
         let currentBalancePara = document.createElement('p');
         currentBalancePara.textContent = "Current balance: " + matchedUser.currentBalance;
@@ -74,7 +91,7 @@ let view = {
         logOutButton.textContent = 'Logout';
         logOutButton.setAttribute('onclick', "handlers.attemptLogout()");
         body.appendChild(logOutButton);
-    }
+    },
 };
 
 //handles communication between the view and the model
@@ -85,7 +102,7 @@ let handlers = {
 
         bank.accounts.forEach(function (item, index) {
             if (item.username === loginInputValue) {
-                view.toggleLogin();
+                view.setUpLogoutView();
                 userNameMatched = true;
                 view.displayUserData(item);
                 view.setLoginParagraph('Welcome, ', item.username);
@@ -93,7 +110,7 @@ let handlers = {
                     view.createLogOutButton();
                 }
                 else {
-                    view.toggleLogout();
+                    document.getElementById('logOutButton').style.display = 'inline';
                 }
                 return;
             }
@@ -104,7 +121,7 @@ let handlers = {
         }
     },
     attemptLogout: function() {
-        view.toggleLogin();
+        view.setUpLoginView();
         view.setLoginParagraph('Enter a username and click login.');
         loginInput.value = '';
         loginInput.focus();
