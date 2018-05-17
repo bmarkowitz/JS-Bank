@@ -1,3 +1,4 @@
+const loginDiv = document.getElementById('login');
 const loginInput = document.getElementById('loginInput');
 const loginButton = document.getElementById('loginButton');
 const loginPara = document.getElementById('loginParagraph');
@@ -15,7 +16,7 @@ let bank = {
                 this.currentBalance += amount;
             },
             withdrawMoney: function (amount) {
-                this.currentBalance +- amount;
+                this.currentBalance + - amount;
             },
             displayCurrentBalance: function () {
                 console.log(this.currentBalance);
@@ -31,27 +32,46 @@ let bank = {
 
 //manages the view
 let view = {
-    setUpLogoutView: function() { //after logging in
-        loginInput.style.display = 'none';
-        loginButton.style.display = 'none';
-        this.createLogOutButton();
+    setUpLogoutView: function (matchedUser) { //after logging in
+
+        loginDiv.style.display = 'none';
         let logOutButton = document.getElementById('logOutButton');
-        logOutButton.style.display = 'inline';
+        if(logOutButton) {
+            logOutButton.style.display = 'inline';
+            view.displayUserData(matchedUser);
+            return
+        }
+        else {
+            logOutButton = this.createLogOutButton();
+            view.displayUserData(matchedUser);
+            body.appendChild(logOutButton);
+        }
     },
-    setUpLoginView: function() { //after logging out
-        loginInput.style.display = 'inline';
-        loginButton.style.display = 'inline';
+    setUpLoginView: function () { //after logging out
+        loginDiv.style.display = 'inline';
         loginPara.style.display = 'Enter a username and click login.';
         let logOutButton = document.getElementById('logOutButton');
         logOutButton.style.display = 'none';
-
-
+        document.getElementById('userDataDiv').style.display = 'none';
     },
     displayUserData: function (matchedUser) {
-        let currentBalancePara = document.createElement('p');
-        currentBalancePara.textContent = "Current balance: " + matchedUser.currentBalance;
+        console.log(matchedUser);
+        if(!document.getElementById('userDataDiv')) {
+            let userDataDiv = document.createElement('div');
+            userDataDiv.setAttribute('id', 'userDataDiv');
 
-        body.appendChild(currentBalancePara);
+            let currentBalancePara = document.createElement('p');
+            currentBalancePara.setAttribute('id', 'currentBalancePara');
+            currentBalancePara.textContent = 'Current balance: ' + matchedUser.currentBalance;
+
+            userDataDiv.appendChild(currentBalancePara);
+            body.appendChild(userDataDiv);
+        }
+        else {
+            let currentBalancePara = document.getElementById('currentBalancePara');
+            currentBalancePara.textContent = 'Current balance: ' + matchedUser.currentBalance;
+            userDataDiv.style.display = 'inline';
+        }
     },
     setLoginParagraph: function (message, name) {
         if (name) {
@@ -62,12 +82,12 @@ let view = {
         }
 
     },
-    createLogOutButton: function() {
+    createLogOutButton: function () {
         let logOutButton = document.createElement('button');
         logOutButton.setAttribute('id', 'logOutButton');
         logOutButton.textContent = 'Logout';
         logOutButton.setAttribute('onclick', "handlers.attemptLogout()");
-        body.appendChild(logOutButton);
+        return logOutButton;
     },
 };
 
@@ -79,14 +99,13 @@ let handlers = {
 
         bank.accounts.forEach(function (item, index) {
             if (item.username === loginInputValue) {
-                view.setUpLogoutView();
                 userNameMatched = true;
-                view.displayUserData(item);
                 view.setLoginParagraph('Welcome, ', item.username);
-                if(!document.getElementById('logOutButton')) {
-                    view.createLogOutButton();
+                if (!document.getElementById('logOutButton')) {
+                    view.setUpLogoutView(item);
                 }
                 else {
+                    view.setUpLogoutView(item);
                     document.getElementById('logOutButton').style.display = 'inline';
                 }
                 return;
@@ -97,7 +116,7 @@ let handlers = {
 
         }
     },
-    attemptLogout: function() {
+    attemptLogout: function () {
         view.setUpLoginView();
         view.setLoginParagraph('Enter a username and click login.');
         loginInput.value = '';
