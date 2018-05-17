@@ -47,29 +47,6 @@ let view = {
 
 
     },
-    // toggleLoginElements: function () {
-    //     if(loginInput.style.display === 'none') {
-    //         loginInput.style.display = 'inline';
-    //         loginButton.style.display = 'inline';
-    //         loginPara.style.display = 'Enter a username and click login.';
-
-    //         this.toggleLogoutElements();
-    //     }
-    //     else {
-    //         loginInput.style.display = 'none';
-    //         loginButton.style.display = 'none';
-    //     }
-    // },
-    // toggleLogoutElements: function() {
-    //     let logOutButton = document.getElementById('logOutButton');
-    //     if(logOutButton.style.display === 'none') {
-    //         logOutButton.style.display = 'inline';
-    //     }
-    //     else {
-    //         logOutButton.style.display = 'none';
-    //     }
-    // },
-
     displayUserData: function (matchedUser) {
         let currentBalancePara = document.createElement('p');
         currentBalancePara.textContent = "Current balance: " + matchedUser.currentBalance;
