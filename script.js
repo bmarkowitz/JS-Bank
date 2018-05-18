@@ -49,13 +49,11 @@ let view = {
     },
     setUpLoginView: function () { //after logging out
         loginDiv.style.display = 'inline';
-        loginPara.style.display = 'Enter a username and click login.';
         let logOutButton = document.getElementById('logOutButton');
         logOutButton.style.display = 'none';
         document.getElementById('userDataDiv').style.display = 'none';
     },
     displayUserData: function (matchedUser) {
-        console.log(matchedUser);
         if(!document.getElementById('userDataDiv')) {
             let userDataDiv = document.createElement('div');
             userDataDiv.setAttribute('id', 'userDataDiv');
