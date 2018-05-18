@@ -112,7 +112,7 @@ let handlers = {
             }
         });
         if (userNameMatched === false) {
-            view.setLoginParagraph('The username you entered either doesn\'t exit or was not found. Please try again.');
+            view.setLoginParagraph('The username you entered either doesn\'t exist or was not found. Please try again.');
 
         }
     },
