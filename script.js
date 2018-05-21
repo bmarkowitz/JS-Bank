@@ -114,13 +114,14 @@ const handlers = {
             if (item.username === loginInputValue) {
                 userNameMatched = true;
                 view.setLoginParagraph('Welcome, ', item.username);
-                if (!document.getElementById('logOutButton')) {
-                    view.setUpLogoutView(item);
-                }
-                else {
-                    view.setUpLogoutView(item);
-                    document.getElementById('logOutButton').style.display = 'inline';
-                }
+                view.setUpLogoutView(item);
+                // if (!document.getElementById('logOutButton')) {
+                //     view.setUpLogoutView(item);
+                // }
+                // else {
+                //     view.setUpLogoutView(item);
+                //     //document.getElementById('logOutButton').style.display = 'inline';
+                // }
                 return;
             }
         });
