@@ -8,25 +8,40 @@ const body = document.querySelector('body');
 let bank = {
     accounts: [],
     addAccount: function (username, password) {
-        const account = {
-            username: username,
-            password: password,
-            currentBalance: 0,
-            depositMoney: function (amount) {
-                this.currentBalance += amount;
-            },
-            withdrawMoney: function (amount) {
-                this.currentBalance +- amount;
-            },
-            displayCurrentBalance: function () {
-                console.log(this.currentBalance);
-            }
-        };
-        this.accounts.push(account);
+        if (this.doesAccountExist(username)) {
+            loginPara.textContent = "Sorry, the username you entered is already in use. Please try again with a different username.";
+        }
+        else {
+            const account = {
+                username: username,
+                password: password,
+                currentBalance: 0,
+                depositMoney: function (amount) {
+                    this.currentBalance += amount;
+                },
+                withdrawMoney: function (amount) {
+                    this.currentBalance + - amount;
+                },
+                displayCurrentBalance: function () {
+                    console.log(this.currentBalance);
+                }
+            };
+            this.accounts.push(account);
+            loginPara.textContent = "Account created."
+        }
     },
     deleteAccount: function (index) {
         this.accounts.splice(index, 1);
     },
+    doesAccountExist: function (username) {
+        let userNameMatched = false;
+        this.accounts.forEach((item, index) => {
+            if (item.username === username) {
+                userNameMatched = true;
+            }
+        });
+        return userNameMatched;
+    }
 
 };
 
@@ -36,7 +51,7 @@ const view = {
 
         loginDiv.style.display = 'none';
         let logOutButton = document.getElementById('logOutButton');
-        if(logOutButton) {
+        if (logOutButton) {
             logOutButton.style.display = 'inline';
             view.displayUserData(matchedUser);
             return
@@ -54,7 +69,7 @@ const view = {
         document.getElementById('userDataDiv').style.display = 'none';
     },
     displayUserData: function (matchedUser) {
-        if(!document.getElementById('userDataDiv')) {
+        if (!document.getElementById('userDataDiv')) {
             const userDataDiv = document.createElement('div');
             userDataDiv.setAttribute('id', 'userDataDiv');
 
