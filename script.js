@@ -8,7 +8,7 @@ const body = document.querySelector('body');
 let bank = {
     accounts: [],
     addAccount: function (username, password) {
-        let account = {
+        const account = {
             username: username,
             password: password,
             currentBalance: 0,
@@ -16,12 +16,12 @@ let bank = {
                 this.currentBalance += amount;
             },
             withdrawMoney: function (amount) {
-                this.currentBalance + - amount;
+                this.currentBalance +- amount;
             },
             displayCurrentBalance: function () {
                 console.log(this.currentBalance);
             }
-        }
+        };
         this.accounts.push(account);
     },
     deleteAccount: function (index) {
@@ -31,7 +31,7 @@ let bank = {
 };
 
 //manages the view
-let view = {
+const view = {
     setUpLogoutView: function (matchedUser) { //after logging in
 
         loginDiv.style.display = 'none';
@@ -49,16 +49,16 @@ let view = {
     },
     setUpLoginView: function () { //after logging out
         loginDiv.style.display = 'inline';
-        let logOutButton = document.getElementById('logOutButton');
+        const logOutButton = document.getElementById('logOutButton');
         logOutButton.style.display = 'none';
         document.getElementById('userDataDiv').style.display = 'none';
     },
     displayUserData: function (matchedUser) {
         if(!document.getElementById('userDataDiv')) {
-            let userDataDiv = document.createElement('div');
+            const userDataDiv = document.createElement('div');
             userDataDiv.setAttribute('id', 'userDataDiv');
 
-            let currentBalancePara = document.createElement('p');
+            const currentBalancePara = document.createElement('p');
             currentBalancePara.setAttribute('id', 'currentBalancePara');
             currentBalancePara.textContent = 'Current balance: ' + matchedUser.currentBalance;
 
@@ -66,7 +66,7 @@ let view = {
             body.appendChild(userDataDiv);
         }
         else {
-            let currentBalancePara = document.getElementById('currentBalancePara');
+            const currentBalancePara = document.getElementById('currentBalancePara');
             currentBalancePara.textContent = 'Current balance: ' + matchedUser.currentBalance;
             userDataDiv.style.display = 'inline';
         }
@@ -81,7 +81,7 @@ let view = {
 
     },
     createLogOutButton: function () {
-        let logOutButton = document.createElement('button');
+        const logOutButton = document.createElement('button');
         logOutButton.setAttribute('id', 'logOutButton');
         logOutButton.textContent = 'Logout';
         logOutButton.setAttribute('onclick', "handlers.attemptLogout()");
@@ -90,12 +90,12 @@ let view = {
 };
 
 //handles communication between the view and the model
-let handlers = {
+const handlers = {
     attemptLogin: function () {
-        let loginInputValue = loginInput.value;
+        const loginInputValue = loginInput.value;
         let userNameMatched = false;
 
-        bank.accounts.forEach(function (item, index) {
+        bank.accounts.forEach((item, index) => {
             if (item.username === loginInputValue) {
                 userNameMatched = true;
                 view.setLoginParagraph('Welcome, ', item.username);
