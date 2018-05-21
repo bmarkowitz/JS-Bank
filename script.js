@@ -8,7 +8,7 @@ const body = document.querySelector('body');
 let bank = {
     accounts: [],
     addAccount: function (username, password) {
-        if (this.doesAccountExist(username)) {
+        if (this.doesUsernameExist(username)) {
             loginPara.textContent = "Sorry, the username you entered is already in use. Please try again with a different username.";
         }
         else {
@@ -33,7 +33,7 @@ let bank = {
     deleteAccount: function (index) {
         this.accounts.splice(index, 1);
     },
-    doesAccountExist: function (username) {
+    doesUsernameExist: function (username) {
         let userNameMatched = false;
         this.accounts.forEach((item, index) => {
             if (item.username === username) {
