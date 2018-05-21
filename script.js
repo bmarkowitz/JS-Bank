@@ -20,14 +20,14 @@ let bank = {
                     this.currentBalance += amount;
                 },
                 withdrawMoney: function (amount) {
-                    this.currentBalance + - amount;
+                    this.currentBalance +- amount;
                 },
                 displayCurrentBalance: function () {
                     console.log(this.currentBalance);
                 }
             };
             this.accounts.push(account);
-            loginPara.textContent = "Account created."
+            loginPara.textContent = "Account created.";
         }
     },
     deleteAccount: function (index) {
@@ -115,13 +115,6 @@ const handlers = {
                 userNameMatched = true;
                 view.setLoginParagraph('Welcome, ', item.username);
                 view.setUpLogoutView(item);
-                // if (!document.getElementById('logOutButton')) {
-                //     view.setUpLogoutView(item);
-                // }
-                // else {
-                //     view.setUpLogoutView(item);
-                //     //document.getElementById('logOutButton').style.display = 'inline';
-                // }
                 return;
             }
         });
